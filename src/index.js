@@ -15,12 +15,13 @@ refs.input.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
 
 // при вводе значения в инпут вызывается функция запроса на сервер
 function onInputChange(event) {
-   let inputNameCountry = event.target.value.trim();
+  const inputNameCountry = event.target.value.trim();
   console.log(inputNameCountry);
 
   fetchCountries(inputNameCountry)
     .then(addMarcup)
     .catch(error => {
+      console.log('beda', error);
       Notify.failure('Oops, there is no country with that name');
     });
 }
@@ -44,17 +45,22 @@ function addMarcup(country) {
     Notify.info('Too many matches found. Please enter a more specific name.');
   }
   if (country.length >= 2 && country.length <= 10) {
-   const markupFlags = properties.map(
+    const markupFlags = properties.map(
       property =>
         ` <img src="${property.flags.svg}" alt="${property.name.common}" />
       ${property.name.common}`
     );
     refs.countryInfo.innerHTML = markupFlags;
+  }
   if (country.length === 1) {
     const markup = properties
       .map(
         property =>
-          `<li class="country-item"> <p class="country-text">Capital:<span class= "country-info-description"> ${
+          `<li class="country-item"> <img src="${property.flags.svg}" alt="${
+            property.name.common
+          }" />
+      ${property.name.common}</li>
+          <li class="country-item"> <p class="country-text">Capital:<span class= "country-info-description"> ${
             property.capital
           }</span></p></li>
           <li class="country-item"> <p class="country-text">Population:<span class= "country-info-description"> ${
@@ -66,51 +72,9 @@ function addMarcup(country) {
       )
       .join('');
     refs.countryList.innerHTML = markup;
-    
-    
   }
 }
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-  
 // import './css/styles.css';
 // import debounce from 'lodash.debounce';
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';

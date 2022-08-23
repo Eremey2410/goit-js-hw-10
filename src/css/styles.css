@@ -21,7 +21,8 @@ body {
 .country-info {
 }
 img {
-  width: 50px;
+  width: 30px;
+  height: 30px;
 }
 .country-list {
   padding: 0;
