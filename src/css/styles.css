@@ -18,7 +18,9 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
-.country-info {
+.country-item {
+  display: flex;
+  align-items: center;
 }
 img {
   width: 30px;
@@ -27,4 +29,29 @@ img {
 .country-list {
   padding: 0;
   list-style-type: none;
+}
+.country-text {
+  font-weight: 700;
+}
+.country-list-description {
+  font-weight: 400;
+}
+.list-description {
+  font-size: 30px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+.country-info {
+  display: flex;
+  flex-direction: column;
+}
+.country-info-one {
+  display: flex;
+  align-items: center;
+}
+.country-info-one + .country-info-one {
+  margin-top: 10px;
+}
+.country-info-one-description {
+  margin-left: 20px;
 }
