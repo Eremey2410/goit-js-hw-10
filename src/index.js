@@ -3,7 +3,6 @@ import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import API from './api-service';
 
-// import API from './api-service';
 const DEBOUNCE_DELAY = 300;
 
 const refs = {
@@ -17,13 +16,16 @@ refs.input.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
 // при вводе значения в инпут вызывается функция запроса на сервер
 function onInputChange(event) {
   const inputNameCountry = event.target.value.trim();
-  console.log(inputNameCountry);
+  // console.log(inputNameCountry);
 
   API.fetchCountries(inputNameCountry)
     .then(addMarcups)
     .catch(error => {
       console.log(error);
-      Notify.failure('Oops, there is no country with that name');
+      throw new Error(
+        Notify.failure('Oops, there is no country with that name')
+      );
+      // Notify.failure('Oops, there is no country with that name');
     });
 }
 // очистка разметки
@@ -37,7 +39,7 @@ function addMarcups(country) {
 
   clearMarkup();
 
-  console.log(country.length);
+  // console.log(country.length);
   if (country.length > 10) {
     Notify.info('Too many matches found. Please enter a more specific name.');
   } else if (country.length >= 2 && country.length <= 10) {
