@@ -18,6 +18,9 @@ function onInputChange(event) {
   const inputNameCountry = event.target.value.trim();
   // console.log(inputNameCountry);
 
+  if (inputNameCountry === '') {
+    return;
+  }
   API.fetchCountries(inputNameCountry)
     .then(addMarcups)
     .catch(error => {
